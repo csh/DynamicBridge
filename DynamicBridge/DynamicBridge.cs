@@ -271,6 +271,9 @@ public unsafe class DynamicBridge : IDalamudPlugin
                                 (!C.Cond_World || ((x.Worlds.Count == 0 || x.Worlds.Contains(Player.Object.CurrentWorld.Id))
                                 && (!C.AllowNegativeConditions || !x.Not.Worlds.Contains(Player.Object.CurrentWorld.Id))))
                                 &&
+                                (!C.Cond_Race || ((x.Races.Count == 0 || x.Races.Any(race => race == (Race) Player.Object.Race(GlamourerManager)))
+                                && (!C.AllowNegativeConditions || !x.Not.Races.Any(race => race == (Race) Player.Object.Race(GlamourerManager)))))
+                                &&
                                 (!C.Cond_Gearset || ((x.Gearsets.Count == 0 || x.Gearsets.Contains(RaptureGearsetModule.Instance()->CurrentGearsetIndex))
                                 && (!C.AllowNegativeConditions || !x.Not.Gearsets.Contains(RaptureGearsetModule.Instance()->CurrentGearsetIndex))))
                                 )

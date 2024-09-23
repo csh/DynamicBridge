@@ -1357,6 +1357,15 @@ namespace DynamicBridge.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Race.
+        /// </summary>
+        public static string RuleRace {
+            get {
+                return ResourceManager.GetString("RuleRace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State.
         /// </summary>
         public static string RuleState {

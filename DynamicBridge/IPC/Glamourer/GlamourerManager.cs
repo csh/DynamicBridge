@@ -1,11 +1,22 @@
 ﻿using DynamicBridge.Configuration;
 using ECommons.EzIpcManager;
+using Glamourer.Api.Enums;
 using Glamourer.Api.IpcSubscribers;
+using Newtonsoft.Json.Linq;
 
 namespace DynamicBridge.IPC.Glamourer;
 
 public unsafe class GlamourerManager
 {
+    
+    private GetState GetState = new(Svc.PluginInterface);
+    // [EzIPC("GetState")] readonly Func<int, uint, (GlamourerApiEc, JObject?)> _getState;
+
+    public (GlamourerApiEc, JObject?) GetStateIPC(int objectIndex) 
+    {
+        return GetState.Invoke(objectIndex);
+    }
+
     public GlamourerReflector Reflector;
     public GlamourerCommands Commands;
 

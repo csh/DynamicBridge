@@ -84,6 +84,7 @@ public static class GuiSettings
                 () => ImGui.Checkbox(Lang.RuleJob, ref C.Cond_Job),
                 () => ImGui.Checkbox(Lang.RuleWorld, ref C.Cond_World),
                 () => ImGui.Checkbox(Lang.RuleGearset, ref C.Cond_Gearset),
+                () => ImGui.Checkbox(Lang.RuleRace, ref C.Cond_Race),
             ],
                 (int)(ImGui.GetContentRegionAvail().X / 180f), ImGuiTableFlags.BordersInner);
             ImGuiGroup.EndGroupBox();

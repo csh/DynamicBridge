@@ -77,6 +77,7 @@ namespace DynamicBridge.Gui
                     C.Cond_World,
                     C.Cond_Zone,
                     C.Cond_ZoneGroup,
+                    C.Cond_Race
                 ];
 
                 List<(Vector2 RowPos, Vector2 ButtonPos, Action BeginDraw, Action AcceptDraw)> MoveCommands = [];
@@ -96,6 +97,7 @@ namespace DynamicBridge.Gui
                     if (C.Cond_Job) ImGui.TableSetupColumn(Lang.RuleJob);
                     if (C.Cond_World) ImGui.TableSetupColumn(Lang.RuleWorld);
                     if (C.Cond_Gearset) ImGui.TableSetupColumn(Lang.RuleGearset);
+                    if (C.Cond_Race) ImGui.TableSetupColumn(Lang.RuleRace);
                     ImGui.TableSetupColumn(Lang.RulePreset);
                     ImGui.TableSetupColumn(" ", ImGuiTableColumnFlags.NoResize | ImGuiTableColumnFlags.WidthFixed);
                     ImGui.TableHeadersRow();
@@ -513,6 +515,28 @@ namespace DynamicBridge.Gui
                             }
                             
                             if (fullList != null) ImGuiEx.Tooltip(UI.AnyNotice + fullList);
+                        }
+                        filterCnt++;
+
+                        if (C.Cond_Race) 
+                        {
+                            ImGui.TableNextColumn();
+                            // Race
+                            ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
+
+                            if (ImGui.BeginCombo("##race", rule.Races.PrintRange(rule.Not.Races, out var fullList, Lang.RuleRace))) 
+                            {
+                                FiltersSelection();
+                                foreach (var race in Enum.GetValues<Core.Race>())
+                                {
+                                    var name = Enum.GetName(race);
+                                    if (name.IsNullOrEmpty()) continue;
+                                    if (Filters[filterCnt].Length > 0 && name.Contains(Filters[filterCnt], StringComparison.OrdinalIgnoreCase)) continue;
+                                    if (OnlySelected[filterCnt] && !rule.Races.ContainsAny(race)) continue;
+                                    DrawSelector($"{name}##{race}", race, rule.Races, rule.Not.Races);
+                                }
+                                ImGui.EndCombo();
+                            }
                         }
                         filterCnt++;
 
