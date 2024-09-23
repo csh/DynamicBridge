@@ -8,15 +8,14 @@ namespace DynamicBridge.Core
 {
     public enum Race : byte
     {
-        Unknown,
-        Hyur,
-        Elezen,
-        Lalafell,
-        Miqote,
-        Roegadyn,
-        AuRa,
-        Hrothgar,
-        Viera,
+        Hyur = 1,
+        Elezen = 2,
+        Lalafell = 3,
+        Miqote = 4,
+        Roegadyn = 5,
+        AuRa = 6,
+        Hrothgar = 7,
+        Viera = 8,
     }
 
     public static class CharacterRaceChecker 
@@ -29,8 +28,9 @@ namespace DynamicBridge.Core
                 if (response == GlamourerApiEc.Success && characterDescriptor != null) 
                 {
                     var race = characterDescriptor.SelectToken("$.Customize.Race.Value");
-                    if (race != null) {
-                        return (byte) race;
+                    if (race != null) 
+                    {
+                        return race.ToObject<byte>();
                     }
                 }
             }

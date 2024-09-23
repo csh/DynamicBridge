@@ -524,7 +524,7 @@ namespace DynamicBridge.Gui
                             // Race
                             ImGui.SetNextItemWidth(ImGui.GetContentRegionAvail().X);
 
-                            if (ImGui.BeginCombo("##race", rule.Races.PrintRange(rule.Not.Races, out var fullList, Lang.RuleRace))) 
+                            if (ImGui.BeginCombo("##race", rule.Races.PrintRange(rule.Not.Races, out var fullList))) 
                             {
                                 FiltersSelection();
                                 foreach (var race in Enum.GetValues<Core.Race>())
